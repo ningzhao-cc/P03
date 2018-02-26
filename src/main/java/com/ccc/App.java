@@ -59,19 +59,19 @@ public class App
 
 
         //33
-        //CompanyOrder cloudcar = new CompanyOrder();
-        //
-        //cloudcar.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        //System.out.println(cloudcar.getClass() + " company's order: ");
-        //cloudcar.order.print();
-        //
-        //CompanyOrder cloudcar2 = new CompanyOrder();
-        //
-        //cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        //cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        //System.out.println(cloudcar2.getClass() + " company's order: ");
-        //
-        //cloudcar2.order.print();
+        CompanyOrder cloudcar = new CompanyOrder();
+
+        cloudcar.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        System.out.println(cloudcar.getClass() + " company's order: ");
+        cloudcar.order.print();
+
+        CompanyOrder cloudcar2 = new CompanyOrder();
+
+        cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        System.out.println(cloudcar2.getClass() + " company's order: ");
+
+        cloudcar2.order.print();
 
     }
 }

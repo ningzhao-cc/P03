@@ -13,14 +13,18 @@ public class Order {
     List<Food> foods = new ArrayList<>();
 
 
-    //
-    //public static Order instance = new Order();
+    //private Order(){}
+
+
+    //private static Order instance = new Order();
     //
     //
     //
     //public static Order getInstance() {
     //    return instance;
     //}
+
+
 
     public static Order instance;
 
