@@ -13,7 +13,7 @@ public class Order {
     List<Food> foods = new ArrayList<>();
 
 
-    //private Order(){}
+    private Order(){}
 
 
     //private static Order instance = new Order();
@@ -26,9 +26,11 @@ public class Order {
 
 
 
-    public static Order instance;
+    private static Order instance;
 
     public static Order getInstance() {
+
+        // synchronous problem.
         if (instance == null) {
             instance = new Order();
         }
