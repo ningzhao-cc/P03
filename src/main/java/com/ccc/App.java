@@ -81,15 +81,35 @@ public class App
         //cloudcar2.order.print();
 
 
+        //try {
+        //
+        //
+        //    Order order1 = Order.getInstance().getClass().newInstance();
+        //    order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //    order1.print();
+        //    Order order2 = Order.getInstance().getClass().newInstance();
+        //    order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //    order2.print();
+        //} catch (InstantiationException e) {
+        //    e.printStackTrace();
+        //} catch (IllegalAccessException e) {
+        //    e.printStackTrace();
+        //}
+
+
+
+        // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
         try {
-            Constructor<Order> constructor = Order.class.getConstructor();
+            Constructor<Order> constructor = Order.class.getDeclaredConstructor();
             constructor.setAccessible(true);
             Order order1 = constructor.newInstance();
             order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+            order1.print();
+            System.out.println(order1.toString());
             Order order2 = constructor.newInstance();
             order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-
-
+            order2.print();
+            System.out.println(order2.toString());
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -99,7 +119,5 @@ public class App
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
-
     }
 }
