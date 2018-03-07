@@ -5,13 +5,17 @@ import chief.Builder;
 import client.CompanyOrder;
 import client.Customer;
 import client.Order;
+import eatclub.EatclubFactory;
 import lunch.Food;
 import static subway.Sub.*;
 
+import noodlehouse.NoodlehouseFactory;
+import restaurant.Factory;
 import subway.SubwayFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Scanner;
 
 
 /**
@@ -23,7 +27,34 @@ public class App
     public static void main( String[] args ) throws ClassNotFoundException {
         // abstract factory
         // client wants to have a lunch in a restaurant
+        Factory factory;
+        Scanner in = new Scanner(System.in);
 
+        do {
+            System.out.println("please select a restaurant: eatclub / noodlehouse / subway ? ");
+            String restaurant = in.nextLine();
+
+            switch (restaurant) {
+                case "eatclub" :
+                    factory = new EatclubFactory();
+                    break;
+                case "noodlehouse" :
+                    factory = new NoodlehouseFactory();
+                    break;
+                case "subway" :
+                    factory = new SubwayFactory();
+                    break;
+                default:
+                    factory = new EatclubFactory();
+
+            }
+
+            Food food = factory.getFood();
+            food.print();
+            System.out.println("you have your food " + food.toString());
+
+        }
+        while (true);
 
 
         // builder
@@ -79,19 +110,20 @@ public class App
         //
         //cloudcar2.order.print();
 
-        CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
-
-        cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        System.out.println(cloudcarOrder.getClass() + " company's order: ");
-        cloudcarOrder.print();
-
-        CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
-
-        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        System.out.println(cloudcarOrder2.getClass() + " company's order: ");
-
-        cloudcarOrder2.print();
+        //// new version
+        //CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
+        //
+        //cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        //System.out.println(cloudcarOrder.getClass() + " company's order: ");
+        //cloudcarOrder.print();
+        //
+        //CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
+        //
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //System.out.println(cloudcarOrder2.getClass() + " company's order: ");
+        //
+        //cloudcarOrder2.print();
 
 
 

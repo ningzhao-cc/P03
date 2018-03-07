@@ -1,6 +1,7 @@
 package subway;
 
 import lunch.Food;
+import utils.CCCUtil;
 
 /**
  * Created by Ning on 2/23/18.
@@ -9,6 +10,7 @@ import lunch.Food;
 
 
 public class Sub extends Food {
+    final String prefix = "Subway : Sub : ";
 
     public enum Size {
         SMALL,
@@ -24,11 +26,13 @@ public class Sub extends Food {
         DEAD
     }
 
+    private String subId;
     private Size size;
     private boolean oven;
     private Spicy spicy;
 
     protected Sub() {
+        subId = prefix + CCCUtil.createInt();
         size = Size.MEDIUM;
         oven = false;
         spicy = Spicy.NONE;
@@ -44,6 +48,10 @@ public class Sub extends Food {
 
     protected void setOven(boolean oven) {
         this.oven = oven;
+    }
+
+    public String toString() {
+        return subId;
     }
 
     public void print() {

@@ -7,4 +7,5 @@ package lunch;
 
 public abstract class Food {
     public abstract void print();
+    public abstract String toString();
 }
