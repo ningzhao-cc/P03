@@ -1,14 +1,21 @@
 package client;
 
+import lunch.Food;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Ning on 2/26/18.
  */
-public class CompanyOrder {
-    public Order order;
+public class CompanyOrder extends Order{
+    private List<Food> foodList = new ArrayList<>();
 
-    public CompanyOrder() {
+    private static CompanyOrder instance = new CompanyOrder();
 
-        // a new CompanyOrder() is not to create a new Order, instead, get the instance of it.
-        order = Order.getInstance();
+    private CompanyOrder(){}
+
+    public static CompanyOrder getInstance() {
+        return instance;
     }
 }

@@ -20,8 +20,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws ClassNotFoundException {
         // abstract factory
         // client wants to have a lunch in a restaurant
 
@@ -65,7 +64,7 @@ public class App
         //System.out.println("**********");
 
 
-        //33
+        // // old version
         //CompanyOrder cloudcar = new CompanyOrder();
         //
         //cloudcar.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
@@ -80,10 +79,24 @@ public class App
         //
         //cloudcar2.order.print();
 
+        CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
 
+        cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        System.out.println(cloudcarOrder.getClass() + " company's order: ");
+        cloudcarOrder.print();
+
+        CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
+
+        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        System.out.println(cloudcarOrder2.getClass() + " company's order: ");
+
+        cloudcarOrder2.print();
+
+
+
+        // // because Order() cannot be reached, this will thrown exception.
         //try {
-        //
-        //
         //    Order order1 = Order.getInstance().getClass().newInstance();
         //    order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
         //    order1.print();
@@ -98,26 +111,53 @@ public class App
 
 
 
-        // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
-        try {
-            Constructor<Order> constructor = Order.class.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            Order order1 = constructor.newInstance();
-            order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-            order1.print();
-            System.out.println(order1.toString());
-            Order order2 = constructor.newInstance();
-            order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-            order2.print();
-            System.out.println(order2.toString());
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        // // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
+        //try {
+        //    Constructor<Order> constructor = Order.class.getDeclaredConstructor();
+        //    constructor.setAccessible(true);
+        //    Order order1 = constructor.newInstance();
+        //    order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //    order1.print();
+        //    System.out.println(order1.toString());
+        //    Order order2 = constructor.newInstance();
+        //    order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //    order2.print();
+        //    System.out.println(order2.toString());
+        //} catch (NoSuchMethodException e) {
+        //    e.printStackTrace();
+        //} catch (IllegalAccessException e) {
+        //    e.printStackTrace();
+        //} catch (InstantiationException e) {
+        //    e.printStackTrace();
+        //} catch (InvocationTargetException e) {
+        //    e.printStackTrace();
+        //}
+
+
+        // // ClassLoader
+        //ClassLoader classLoader = Order.class.getClassLoader();
+        //try {
+        //    Class classLoader1 = classLoader.loadClass("client.Order");
+        //
+        //
+        //    try {
+        //        Order order1 = (Order)classLoader1.newInstance();
+        //        order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //        order1.print();
+        //        System.out.println(order1.toString());
+        //        Order order2 = (Order) classLoader1.newInstance();
+        //        order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //        order2.print();
+        //        System.out.println(order2.toString());
+        //
+        //    } catch (InstantiationException e) {
+        //        e.printStackTrace();
+        //    } catch (IllegalAccessException e) {
+        //        e.printStackTrace();
+        //    }
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //}
+
     }
 }
