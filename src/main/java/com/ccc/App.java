@@ -139,26 +139,26 @@ public class App
         //cloudcar2.order.print();
 
         //// new version
-        CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
-
-        cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        System.out.println(cloudcarOrder.getClass() + " company's order: ");
-        cloudcarOrder.print();
-
-        CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
-        //CompanyOrder cloudcarOrderCopy = (CompanyOrder) cloudcarOrder2.clone();
-
-        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        System.out.println(cloudcarOrder2.getClass() + " company's order: ");
-
-        cloudcarOrder2.print();
-
-        System.out.println(cloudcarOrder);
-        System.out.println(cloudcarOrder2);
-        //System.out.println(cloudcarOrderCopy);
-
-        //cloudcarOrderCopy.print();
+        //CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
+        //
+        //cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        //System.out.println(cloudcarOrder.getClass() + " company's order: ");
+        //cloudcarOrder.print();
+        //
+        //CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
+        ////CompanyOrder cloudcarOrderCopy = (CompanyOrder) cloudcarOrder2.clone();
+        //
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //System.out.println(cloudcarOrder2.getClass() + " company's order: ");
+        //
+        //cloudcarOrder2.print();
+        //
+        //System.out.println(cloudcarOrder);
+        //System.out.println(cloudcarOrder2);
+        ////System.out.println(cloudcarOrderCopy);
+        //
+        ////cloudcarOrderCopy.print();
 
 
         // // because Order() cannot be reached, this will thrown exception.
@@ -177,27 +177,27 @@ public class App
 
 
 
-        // // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
-        //try {
-        //    Constructor<Order> constructor = Order.class.getDeclaredConstructor();
-        //    constructor.setAccessible(true);
-        //    Order order1 = constructor.newInstance();
-        //    order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        //    order1.print();
-        //    System.out.println(order1.toString());
-        //    Order order2 = constructor.newInstance();
-        //    order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        //    order2.print();
-        //    System.out.println(order2.toString());
-        //} catch (NoSuchMethodException e) {
-        //    e.printStackTrace();
-        //} catch (IllegalAccessException e) {
-        //    e.printStackTrace();
-        //} catch (InstantiationException e) {
-        //    e.printStackTrace();
-        //} catch (InvocationTargetException e) {
-        //    e.printStackTrace();
-        //}
+         // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
+        try {
+            Constructor<CompanyOrder> constructor = CompanyOrder.class.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            CompanyOrder order1 = constructor.newInstance();
+            order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+            order1.print();
+            System.out.println(order1.toString());
+            CompanyOrder order2 = constructor.newInstance();
+            order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+            order2.print();
+            System.out.println(order2.toString());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
 
         // // ClassLoader

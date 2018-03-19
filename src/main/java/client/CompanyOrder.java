@@ -13,7 +13,6 @@ public class CompanyOrder extends Order{
 
     private CompanyOrder(){}
 
-    // //
     private static CompanyOrder instance = new CompanyOrder();
 
     public static CompanyOrder getInstance() {
