@@ -81,28 +81,28 @@ public class App
 
 
         //22
-        Customer ning = new Customer();
-        ning.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        System.out.println(ning.getClass() + " ning's order: ");
-        ning.order.print();
-        Receipt ningReceipt = ning.order.getReceipt();
-        System.out.println("ning's old receipt: ");
-        ningReceipt.print();
-        Receipt ningReceiptToNathan = (Receipt) ningReceipt.clone();
-        System.out.println("ning's receipt shared to Nathan: ");
-        ningReceiptToNathan.print();
-
-        System.out.println("-----------");
-
-        ning.order.addOrder(new EatclubFactory().getNoodle());
-        System.out.println(ning.getClass() + " ning's order: ");
-        ning.order.print();
-
-
-        System.out.println("ning's old receipt: ");
-        ningReceipt.print();
-        System.out.println("ning's receipt shared to Nathan: ");
-        ningReceiptToNathan.print();
+        //Customer ning = new Customer();
+        //ning.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        //System.out.println(ning.getClass() + " ning's order: ");
+        //ning.order.print();
+        //Receipt ningReceipt = ning.order.getReceipt();
+        //System.out.println("ning's old receipt: ");
+        //ningReceipt.print();
+        //Receipt ningReceiptToNathan = (Receipt) ningReceipt.clone();
+        //System.out.println("ning's receipt shared to Nathan: ");
+        //ningReceiptToNathan.print();
+        //
+        //System.out.println("-----------");
+        //
+        //ning.order.addOrder(new EatclubFactory().getNoodle());
+        //System.out.println(ning.getClass() + " ning's order: ");
+        //ning.order.print();
+        //
+        //
+        //System.out.println("ning's old receipt: ");
+        //ningReceipt.print();
+        //System.out.println("ning's receipt shared to Nathan: ");
+        //ningReceiptToNathan.print();
 
         //System.out.println("-----------");
         //
@@ -139,20 +139,26 @@ public class App
         //cloudcar2.order.print();
 
         //// new version
-        //CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
-        //
-        //cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        //System.out.println(cloudcarOrder.getClass() + " company's order: ");
-        //cloudcarOrder.print();
-        //
-        //CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
-        //
-        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        //System.out.println(cloudcarOrder2.getClass() + " company's order: ");
-        //
-        //cloudcarOrder2.print();
+        CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
 
+        cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        System.out.println(cloudcarOrder.getClass() + " company's order: ");
+        cloudcarOrder.print();
+
+        CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
+        //CompanyOrder cloudcarOrderCopy = (CompanyOrder) cloudcarOrder2.clone();
+
+        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        System.out.println(cloudcarOrder2.getClass() + " company's order: ");
+
+        cloudcarOrder2.print();
+
+        System.out.println(cloudcarOrder);
+        System.out.println(cloudcarOrder2);
+        //System.out.println(cloudcarOrderCopy);
+
+        //cloudcarOrderCopy.print();
 
 
         // // because Order() cannot be reached, this will thrown exception.
