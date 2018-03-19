@@ -91,15 +91,19 @@ public class App
         Receipt ningReceiptToNathan = (Receipt) ningReceipt.clone();
         System.out.println("ning's receipt shared to Nathan: ");
         ningReceiptToNathan.print();
-        //System.out.println("-----------");
-        //ning.order.addOrder(new EatclubFactory().getNoodle());
-        //ning.order.print();
-        //
-        //
-        //System.out.println("ning's old receipt: ");
-        //ningReceipt.print();
-        //System.out.println("ning's receipt shared to Nathan: ");
-        //ningReceiptToNathan.print();
+
+        System.out.println("-----------");
+
+        ning.order.addOrder(new EatclubFactory().getNoodle());
+        System.out.println(ning.getClass() + " ning's order: ");
+        ning.order.print();
+
+
+        System.out.println("ning's old receipt: ");
+        ningReceipt.print();
+        System.out.println("ning's receipt shared to Nathan: ");
+        ningReceiptToNathan.print();
+
         //System.out.println("-----------");
         //
         //

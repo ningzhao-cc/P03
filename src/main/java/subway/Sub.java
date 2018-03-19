@@ -55,6 +55,6 @@ public class Sub extends Food {
     }
 
     public void print() {
-        System.out.println("this is a size: " + size + ", ovened ? " + oven + ", spicy: " + spicy + " sub!");
+        System.out.println("this is a size: " + size + ", ovened ? " + oven + ", spicy: " + spicy + " sub! " + subId);
     }
 }
