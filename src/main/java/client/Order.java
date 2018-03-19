@@ -1,6 +1,8 @@
 package client;
 
 import lunch.Food;
+import receipt.PersonalReceipt;
+import receipt.Receipt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,32 +13,6 @@ import java.util.List;
 public class Order {
     // order should be be one order at a time for a person
     List<Food> foods = new ArrayList<>();
-
-
-    //private Order(){}
-
-
-    //private static Order instance = new Order();
-    //
-    //
-    //
-    //public static Order getInstance() {
-    //    return instance;
-    //}
-
-
-
-    //private static Order instance;
-    //
-    //public static Order getInstance() {
-    //
-    //    // synchronous problem.
-    //    if (instance == null) {
-    //        instance = new Order();
-    //    }
-    //    return instance;
-    //}
-
 
     public void addOrder(Food food) {
         foods.add(food);
@@ -52,6 +28,13 @@ public class Order {
                 f.print();
             }
         }
+    }
+
+    public Receipt getReceipt() {
+        Receipt receipt = new PersonalReceipt(foods);
+        return new PersonalReceipt(receipt.clone());
+        //return receipt;
+
     }
 
 }

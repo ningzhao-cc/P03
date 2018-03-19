@@ -5,11 +5,13 @@ import chief.Builder;
 import client.CompanyOrder;
 import client.Customer;
 import client.Order;
+import com.sun.org.apache.regexp.internal.RE;
 import eatclub.EatclubFactory;
 import lunch.Food;
 import static subway.Sub.*;
 
 import noodlehouse.NoodlehouseFactory;
+import receipt.Receipt;
 import restaurant.Factory;
 import subway.SubwayFactory;
 
@@ -27,34 +29,34 @@ public class App
     public static void main( String[] args ) throws ClassNotFoundException {
         // abstract factory
         // client wants to have a lunch in a restaurant
-        Factory factory;
-        Scanner in = new Scanner(System.in);
-
-        do {
-            System.out.println("please select a restaurant: eatclub / noodlehouse / subway ? ");
-            String restaurant = in.nextLine();
-
-            switch (restaurant) {
-                case "eatclub" :
-                    factory = new EatclubFactory();
-                    break;
-                case "noodlehouse" :
-                    factory = new NoodlehouseFactory();
-                    break;
-                case "subway" :
-                    factory = new SubwayFactory();
-                    break;
-                default:
-                    factory = new EatclubFactory();
-
-            }
-
-            Food food = factory.getFood();
-            food.print();
-            System.out.println("you have your food " + food.toString());
-
-        }
-        while (true);
+        //Factory factory;
+        //Scanner in = new Scanner(System.in);
+        //
+        //do {
+        //    System.out.println("please select a restaurant: eatclub / noodlehouse / subway ? ");
+        //    String restaurant = in.nextLine();
+        //
+        //    switch (restaurant) {
+        //        case "eatclub" :
+        //            factory = new EatclubFactory();
+        //            break;
+        //        case "noodlehouse" :
+        //            factory = new NoodlehouseFactory();
+        //            break;
+        //        case "subway" :
+        //            factory = new SubwayFactory();
+        //            break;
+        //        default:
+        //            factory = new EatclubFactory();
+        //
+        //    }
+        //
+        //    Food food = factory.getFood();
+        //    food.print();
+        //    System.out.println("you have your food " + food.toString());
+        //
+        //}
+        //while (true);
 
 
         // builder
@@ -79,12 +81,34 @@ public class App
 
 
         //22
-        //Customer ning = new Customer();
-        //ning.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        //System.out.println(ning.getClass() + " ning's order: ");
+        Customer ning = new Customer();
+        ning.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        System.out.println(ning.getClass() + " ning's order: ");
+        ning.order.print();
+        Receipt ningReceipt = ning.order.getReceipt();
+        System.out.println("ning's old receipt: ");
+        ningReceipt.print();
+        Receipt ningReceiptToNathan = (Receipt) ningReceipt.clone();
+        System.out.println("ning's receipt shared to Nathan: ");
+        ningReceiptToNathan.print();
+        //System.out.println("-----------");
+        //ning.order.addOrder(new EatclubFactory().getNoodle());
         //ning.order.print();
         //
         //
+        //System.out.println("ning's old receipt: ");
+        //ningReceipt.print();
+        //System.out.println("ning's receipt shared to Nathan: ");
+        //ningReceiptToNathan.print();
+        //System.out.println("-----------");
+        //
+        //
+        //ningReceipt = ning.order.getReceipt();
+        //System.out.println("ning's new receipt: ");
+        //ningReceipt.print();
+
+
+        //System.out.println("*************");
         //Customer nathan = new Customer();
         //nathan.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
         //nathan.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
