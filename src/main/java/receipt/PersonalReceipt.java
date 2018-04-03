@@ -17,18 +17,18 @@ public class PersonalReceipt extends Receipt {
         return clone;
     }
 
-    //// shallow copy
-    //public PersonalReceipt(List<Food> foods) {
-    //    foodStringList = foods;
-    //}
-
-    // deep copy
+    // shallow copy
     public PersonalReceipt(List<Food> foods) {
-        foodStringList = new ArrayList<>();
-        for (Food f : foods) {
-            foodStringList.add(f);
-        }
+        foodStringList = foods;
     }
+
+    //// deep copy
+    //public PersonalReceipt(List<Food> foods) {
+    //    foodStringList = new ArrayList<>();
+    //    for (Food f : foods) {
+    //        foodStringList.add(f);
+    //    }
+    //}
 
     public PersonalReceipt(Object o) {
         foodStringList = ((PersonalReceipt)o).getFoodStringList();

@@ -3,6 +3,7 @@ package com.ccc;
 import chief.Builder;
 
 import client.CompanyOrder;
+import client.CompanyOrderPrototype;
 import client.Customer;
 import client.Order;
 import com.sun.org.apache.regexp.internal.RE;
@@ -80,18 +81,20 @@ public class App
         //sub.print();
 
 
-        //22
+        //// prototype
         //Customer ning = new Customer();
         //ning.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
         //System.out.println(ning.getClass() + " ning's order: ");
         //ning.order.print();
         //Receipt ningReceipt = ning.order.getReceipt();
         //System.out.println("ning's old receipt: ");
+        //System.out.println(ningReceipt);
         //ningReceipt.print();
         //Receipt ningReceiptToNathan = (Receipt) ningReceipt.clone();
         //System.out.println("ning's receipt shared to Nathan: ");
+        //System.out.println(ningReceiptToNathan);
         //ningReceiptToNathan.print();
-        //
+        ////
         //System.out.println("-----------");
         //
         //ning.order.addOrder(new EatclubFactory().getNoodle());
@@ -103,10 +106,10 @@ public class App
         //ningReceipt.print();
         //System.out.println("ning's receipt shared to Nathan: ");
         //ningReceiptToNathan.print();
-
+        //
         //System.out.println("-----------");
-        //
-        //
+
+
         //ningReceipt = ning.order.getReceipt();
         //System.out.println("ning's new receipt: ");
         //ningReceipt.print();
@@ -123,22 +126,7 @@ public class App
         //System.out.println("**********");
 
 
-        // // old version
-        //CompanyOrder cloudcar = new CompanyOrder();
-        //
-        //cloudcar.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
-        //System.out.println(cloudcar.getClass() + " company's order: ");
-        //cloudcar.order.print();
-        //
-        //CompanyOrder cloudcar2 = new CompanyOrder();
-        //
-        //cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        //cloudcar2.order.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        //System.out.println(cloudcar2.getClass() + " company's order: ");
-        //
-        //cloudcar2.order.print();
-
-        //// new version
+        //// Singleton
         //CompanyOrder cloudcarOrder = CompanyOrder.getInstance();
         //
         //cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
@@ -146,7 +134,7 @@ public class App
         //cloudcarOrder.print();
         //
         //CompanyOrder cloudcarOrder2 = CompanyOrder.getInstance();
-        ////CompanyOrder cloudcarOrderCopy = (CompanyOrder) cloudcarOrder2.clone();
+        //
         //
         //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
         //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
@@ -154,76 +142,90 @@ public class App
         //
         //cloudcarOrder2.print();
         //
-        //System.out.println(cloudcarOrder);
-        //System.out.println(cloudcarOrder2);
-        ////System.out.println(cloudcarOrderCopy);
+        //System.out.println("cloudcarOrder address:" + cloudcarOrder);
+        //System.out.println("cloudcarOrder2 address:"+ cloudcarOrder2);
+
+
+        //// Singleton vs Prototype
+        //CompanyOrderPrototype cloudcarOrder = CompanyOrderPrototype.getInstance();
         //
-        ////cloudcarOrderCopy.print();
+        //cloudcarOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.SMALL).getFood());
+        //System.out.println(cloudcarOrder.getClass() + " company's order: ");
+        //cloudcarOrder.print();
+        //
+        //CompanyOrderPrototype cloudcarOrder2 = CompanyOrderPrototype.getInstance();
+        //
+        //
+        //
+        //CompanyOrderPrototype cloudcarOrderCopy = (CompanyOrderPrototype) cloudcarOrder2.clone();
+        //
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+        //cloudcarOrder2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+        //System.out.println(cloudcarOrder2.getClass() + " company's order: ");
+        //
+        //cloudcarOrder2.print();
+        //
+        //System.out.println("cloudcarOrder address:" + cloudcarOrder);
+        //System.out.println("cloudcarOrder2 address:"+ cloudcarOrder2);
+        //System.out.println("cloudcarOrderCopy address:"+ cloudcarOrderCopy);
+        //
+        //cloudcarOrderCopy.print();
 
 
-        // // because Order() cannot be reached, this will thrown exception.
+
+        // // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
         //try {
-        //    Order order1 = Order.getInstance().getClass().newInstance();
+        //    Constructor<CompanyOrder> constructor = CompanyOrder.class.getDeclaredConstructor();
+        //    constructor.setAccessible(true);
+        //    CompanyOrder order1 = constructor.newInstance();
         //    order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
         //    order1.print();
-        //    Order order2 = Order.getInstance().getClass().newInstance();
+        //    System.out.println(order1.toString());
+        //    CompanyOrder order2 = constructor.newInstance();
         //    order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
         //    order2.print();
-        //} catch (InstantiationException e) {
+        //    System.out.println(order2.toString());
+        //} catch (NoSuchMethodException e) {
         //    e.printStackTrace();
         //} catch (IllegalAccessException e) {
         //    e.printStackTrace();
-        //}
-
-
-
-         // use reflection, changed the access of the constructor to be PUBLIC, then able to create multiple instances for a singleton class
-        try {
-            Constructor<CompanyOrder> constructor = CompanyOrder.class.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            CompanyOrder order1 = constructor.newInstance();
-            order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-            order1.print();
-            System.out.println(order1.toString());
-            CompanyOrder order2 = constructor.newInstance();
-            order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-            order2.print();
-            System.out.println(order2.toString());
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
-
-        // // ClassLoader
-        //ClassLoader classLoader = Order.class.getClassLoader();
-        //try {
-        //    Class classLoader1 = classLoader.loadClass("client.Order");
-        //
-        //
-        //    try {
-        //        Order order1 = (Order)classLoader1.newInstance();
-        //        order1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
-        //        order1.print();
-        //        System.out.println(order1.toString());
-        //        Order order2 = (Order) classLoader1.newInstance();
-        //        order2.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
-        //        order2.print();
-        //        System.out.println(order2.toString());
-        //
-        //    } catch (InstantiationException e) {
-        //        e.printStackTrace();
-        //    } catch (IllegalAccessException e) {
-        //        e.printStackTrace();
-        //    }
-        //} catch (ClassNotFoundException e) {
+        //} catch (InstantiationException e) {
+        //    e.printStackTrace();
+        //} catch (InvocationTargetException e) {
         //    e.printStackTrace();
         //}
 
+
+        // // ClassLoader
+
+        ClassLoader classLoader = CompanyOrder.class.getClassLoader();
+        ClassLoader classLoader1 = CompanyOrder.class.getClassLoader();
+        System.out.println(classLoader);
+        System.out.println(classLoader1);
+        try {
+            Class companyOrderClass = classLoader.loadClass("client.CompanyOrder");
+            Class companyOrderClass1 = classLoader1.loadClass("client.CompanyOrder");
+
+            System.out.println(companyOrderClass);
+            System.out.println(companyOrderClass1);
+
+            try {
+                CompanyOrder companyOrder = (CompanyOrder) companyOrderClass.newInstance();
+                companyOrder.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.LARGE).setOven(true).setSpicy(Spicy.HOT).getFood());
+                companyOrder.print();
+                System.out.println("companyOrder address: " + companyOrder);
+                CompanyOrder companyOrder1 = (CompanyOrder) companyOrderClass1.newInstance();
+                companyOrder1.addOrder(new SubwayFactory().getSubBuilder().setSize(Size.MEDIUM).setOven(true).setSpicy(Spicy.DEAD).getFood());
+                companyOrder1.print();
+                System.out.println("companyOrder1 address: " + companyOrder1);
+
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
